@@ -1,0 +1,26 @@
+﻿using System;
+
+namespace SumOfArray
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Nhập kích thước mảng: ");
+            int size = int.Parse(Console.ReadLine());
+            ushort[] arr = new ushort[size];
+            Console.WriteLine("Nhập các phần tử của mảng:");
+            for (int i = 0; i < size; i++)
+            {
+                Console.Write($"Nhập phần tử thứ {i}: ");
+                arr[i] = ushort.Parse(Console.ReadLine());
+            }
+            ulong sum = 0;
+            foreach (ushort num in arr)
+            {
+                sum += num;
+            }
+            Console.WriteLine($"Tổng của các phần tử trong mảng: {sum}");
+        }
+    }
+}
