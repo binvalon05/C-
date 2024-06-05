@@ -1,0 +1,38 @@
+﻿using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        int sum = 0;
+        bool continueInput = true;
+        Console.WriteLine("Enter a series of numbers. Negative numbers will be skipped.");
+        while (continueInput)
+        {
+            Console.Write("Enter a number (or 'q' to quit): ");
+            string input = Console.ReadLine();
+            if (input.ToLower() == "q")
+            {
+                continueInput = false;
+                break;
+            }
+            if (int.TryParse(input, out int number))
+            {
+                if (number >= 0)
+                {
+                    sum += number;
+                }
+                else
+                {
+                    Console.WriteLine($"Skipping negative number: {number}");
+                    continue;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter a number or 'q' to quit.");
+            }
+        }
+        Console.WriteLine($"The sum of the positive numbers is: {sum}");
+    }
+}
