@@ -1,0 +1,29 @@
+﻿using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Nhập số lượng phần tử trong mảng: ");
+        int n = int.Parse(Console.ReadLine());
+        long[] numbers = new long[n];
+        Console.WriteLine("Nhập các số nguyên vào mảng:");
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write($"Nhập số thứ {i + 1}: ");
+            numbers[i] = long.Parse(Console.ReadLine());
+        }
+        long sum = CalculateSum(numbers);
+        Console.WriteLine($"Tổng của các số trong mảng là: {sum}");
+    }
+
+    static long CalculateSum(long[] arr)
+    {
+        long total = 0;
+        foreach (long num in arr)
+        {
+            total += num;
+        }
+        return total;
+    }
+}
