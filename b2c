@@ -1,0 +1,17 @@
+﻿using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        byte n;
+        uint sum = 0;
+        Console.Write("Nhập số nguyên n (0 - 255): ");
+        n = byte.Parse(Console.ReadLine());
+        for (byte i = 1; i <= n; i++)
+        {
+            sum += i;
+        }
+        Console.WriteLine($"Tổng các số từ 1 đến {n} là: {sum}");
+    }
+}
