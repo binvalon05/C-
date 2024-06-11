@@ -1,0 +1,36 @@
+using System;
+using System.IO;
+
+class Program
+{
+    static void Main()
+    {
+        // Nhập tên file từ người dùng
+        Console.Write("Nhập tên file: ");
+        string fileName = Console.ReadLine();
+
+        // Nhập nội dung file từ người dùng
+        Console.WriteLine("Nhập nội dung file (kết thúc bằng Ctrl+Z):");
+        string content = "";
+        string line;
+        while ((line = Console.ReadLine()) != null)
+        {
+            content += line + "\n";
+        }
+
+        // Ghi nội dung vào file
+        using (StreamWriter writer = new StreamWriter(fileName))
+        {
+            writer.Write(content);
+        }
+        Console.WriteLine("Đã ghi nội dung vào file.");
+
+        // Đọc nội dung từ file và hiển thị
+        using (StreamReader reader = new StreamReader(fileName))
+        {
+            string fileContent = reader.ReadToEnd();
+            Console.WriteLine("\nNội dung file:");
+            Console.WriteLine(fileContent);
+        }
+    }
+}
