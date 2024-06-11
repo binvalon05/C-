@@ -1,0 +1,63 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Nhận chuỗi ký tự từ người dùng
+        Console.Write("Nhập chuỗi ký tự: ");
+        string input = Console.ReadLine();
+
+        // Đảo ngược chuỗi
+        string reversed = ReverseString(input);
+
+        // In chuỗi đảo ngược
+        Console.WriteLine("Chuỗi đảo ngược: " + reversed);
+    }
+
+    static string ReverseString(string str)
+    {
+        // Chuyển chuỗi thành mảng ký tự
+        char[] chars = str.ToCharArray();
+
+        // Đảo ngược mảng ký tự
+        Array.Reverse(chars);
+
+        // Chuyển mảng ký tự trở lại thành chuỗi
+        return new string(chars);
+    }
+}
+
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Nhận chuỗi ký tự từ người dùng
+        Console.Write("Nhập chuỗi ký tự: ");
+        string input = Console.ReadLine();
+
+        // Đếm số từ trong chuỗi
+        int wordCount = CountWords(input);
+
+        // In kết quả
+        Console.WriteLine("Số từ trong chuỗi: " + wordCount);
+    }
+
+    static int CountWords(string str)
+    {
+        // Xóa các khoảng trắng dư thừa
+        str = str.Trim();
+
+        // Nếu chuỗi rỗng, trả về 0 từ
+        if (string.IsNullOrEmpty(str))
+            return 0;
+
+        // Tách chuỗi thành mảng các từ
+        string[] words = str.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+
+        // Trả về số lượng từ
+        return words.Length;
+    }
+}
