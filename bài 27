@@ -1,0 +1,81 @@
+interface KPI {
+    double calculateKPI();
+}
+
+class Person {
+    protected String name;
+    protected int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+class Student extends Person implements KPI {
+    private double gpa;
+
+    public Student(String name, int age, double gpa) {
+        super(name, age);
+        this.gpa = gpa;
+    }
+
+    public double getGpa() {
+        return gpa;
+    }
+
+    public void setGpa(double gpa) {
+        this.gpa = gpa;
+    }
+
+    @Override
+    public double calculateKPI() {
+        return gpa;
+    }
+}
+
+class Teacher extends Person implements KPI {
+    private String major;
+    private int publications;
+
+    public Teacher(String name, int age, String major, int publications) {
+        super(name, age);
+        this.major = major;
+        this.publications = publications;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public int getPublications() {
+        return publications;
+    }
+
+    public void setPublications(int publications) {
+        this.publications = publications;
+    }
+
+    @Override
+    public double calculateKPI() {
+        return 1.5 * publications;
+    }
+
+    @Override
+    public String toString() {
+        return "Teacher - Name: " + name + ", Age: " + age + ", Major: " + major + ", Publications: " + publications;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Student student = new Student("Nguyễn Tiến Dũng", 20, 3.8);
+        Teacher teacher = new Teacher("Vũ Đức Việt", 38, "CNTT&TT", 5);
+
+        System.out.println(student.toString());
+        System.out.println("Student's KPI: " + student.calculateKPI());
+
+        System.out.println(teacher.toString());
+        System.out.println("Teacher's KPI: " + teacher.calculateKPI());
+    }
+}
