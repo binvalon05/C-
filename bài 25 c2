@@ -1,0 +1,96 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int n;
+        do
+        {
+            Console.WriteLine("Nhap vao so nguyen n (2-10): ");
+        } while (!Int32.TryParse(Console.ReadLine(), out n) || n < 2 || n > 10);
+
+        // Khai báo một mảng chứa đối tượng Person
+        Person[] persons = new Person[n];
+
+        // Nhập mảng các đối tượng Person
+        InputPersonArray(persons);
+
+        // Hiển thị mảng các đối tượng Person
+        DisplayPersonArray(persons);
+
+        // Hiển thị số lượng Professor trong mảng
+        int countProfessors = CountProfessors(persons);
+        Console.WriteLine("So Professor trong mang: " + countProfessors);
+    }
+
+    static void InputPersonArray(Person[] persons)
+    {
+        for (int i = 0; i < persons.Length; i++)
+        {
+            string type;
+            do
+            {
+                Console.WriteLine("Nhap loai doi tuong (ta/lec/gs): ");
+                type = Console.ReadLine().ToLower();
+            } while (type != "ta" && type != "lec" && type != "gs");
+
+            switch (type)
+            {
+                case "ta":
+                    persons[i] = InputTeachingAssistant();
+                    break;
+                case "lec":
+                    persons[i] = InputLecturer();
+                    break;
+                case "gs":
+                    persons[i] = InputProfessor();
+                    break;
+            }
+        }
+    }
+
+    static TeachingAssistant InputTeachingAssistant()
+    {
+        Console.WriteLine("Nhap thong tin cho Teaching Assistant: ");
+        // Thực hiện logic nhập thông tin của Teaching Assistant
+        return new TeachingAssistant(/*Thông tin của Teaching Assistant*/);
+    }
+
+    static Lecturer InputLecturer()
+    {
+        Console.WriteLine("Nhap thong tin cho Lecturer: ");
+        // Thực hiện logic nhập thông tin của Lecturer
+        return new Lecturer(/*Thông tin của Lecturer*/);
+    }
+
+    static Professor InputProfessor()
+    {
+        Console.WriteLine("Nhap thong tin cho Professor: ");
+        // Thực hiện logic nhập thông tin của Professor
+        return new Professor(/*Thông tin của Professor*/);
+    }
+
+    static void DisplayPersonArray(Person[] persons)
+    {
+        Console.WriteLine("Danh sach doi tuong: ");
+        foreach (Person person in persons)
+        {
+            // Hiển thị thông tin, role, và KPI của từng đối tượng
+            Console.WriteLine("Thong tin: " + person.GetName() + ", Role: " + person.getRole() + ", KPI: " + person.calculateKPI());
+        }
+    }
+
+    static int CountProfessors(Person[] persons)
+    {
+        int count = 0;
+        foreach (Person person in persons)
+        {
+            if (person is Professor)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+}
