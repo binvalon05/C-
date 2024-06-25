@@ -1,0 +1,113 @@
+using System;
+
+//Tạo lớp trừu tượng Person chứa các thuộc tính chung và phương thức trừu tượng.
+public abstract class Person
+{
+    public string name;
+    public int age;
+    public string gender;
+    protected string bank_account;
+
+    public Person(string name, int age, string gender)
+    {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        bank_account = "";
+    }
+
+    public abstract string getRole();
+}
+
+// Định nghĩa interface KPIEvaluator để tính toán KPIpublic interface KPIEvaluator
+{
+    double calculateKPI();
+}
+
+// Lớp TeachingAssistant kế thừa từ Person và implement interface KPIEvaluator.
+public class TeachingAssistant : Person, KPIEvaluator
+{
+    public string employeeID;
+    private int numberOfCourses;
+
+    public TeachingAssistant(string name, int age, string gender, string employeeID, int numberOfCourses)
+        : base(name, age, gender)
+    {
+        this.employeeID = employeeID;
+        this.numberOfCourses = numberOfCourses;
+    }
+
+    public override string getRole()
+    {
+        return "Teaching Assistant";
+    }
+
+    public double calculateKPI()
+    {
+        return numberOfCourses * 5;
+    }
+}
+
+//  Lớp Lecturer kế thừa từ Person và implement interface KPIEvaluator.
+public class Lecturer : Person, KPIEvaluator
+{
+    public string employeeID;
+    private int numberOfPublications;
+
+    public Lecturer(string name, int age, string gender, string employeeID, int numberOfPublications)
+        : base(name, age, gender)
+    {
+        this.employeeID = employeeID;
+        this.numberOfPublications = numberOfPublications;
+    }
+
+    public override string getRole()
+    {
+        return "Lecturer";
+    }
+
+    public double calculateKPI()
+    {
+        return numberOfPublications * 7;
+    }
+}
+
+// Lớp Professor kế thừa từ Lecturer và override phương thức calculateKPI().
+public class Professor : Lecturer
+{
+    public static int countProfessors = 0;
+    private int numberOfProjects;
+
+    public Professor(string name, int age, string gender, string employeeID, int numberOfPublications, int numberOfProjects)
+        : base(name, age, gender, employeeID, numberOfPublications)
+    {
+        this.numberOfProjects = numberOfProjects;
+        countProfessors++;
+    }
+
+    public override string getRole()
+    {
+        return "Professor";
+    }
+
+    public override double calculateKPI()
+    {
+        return base.calculateKPI() + numberOfProjects * 10;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Phần khai báo hàm main() và tạo các đối tượng TeachingAssistant, Lecturer và Professor.
+        TeachingAssistant ta = new TeachingAssistant("Alice", 25, "Female", "TA001", 4);
+        Lecturer lecturer = new Lecturer("Bob", 30, "Male", "LEC001", 6);
+        Professor professor = new Professor("Carol", 40, "Female", "PROF001", 10, 3);
+
+        // In ra vai trò và KPI tương ứng của từng đối tượng
+        Console.WriteLine("Teaching Assistant - Role: {0}, KPI: {1}", ta.getRole(), ta.calculateKPI());
+        Console.WriteLine("Lecturer - Role: {0}, KPI: {1}", lecturer.getRole(), lecturer.calculateKPI());
+        Console.WriteLine("Professor - Role: {0}, KPI: {1}", professor.getRole(), professor.calculateKPI());
+    }
+}
