@@ -1,0 +1,101 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        int n;
+        Scanner scanner = new Scanner(System.in);
+
+        do {
+            System.out.println("Nhap vao so nguyen n (2-10): ");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Vui long nhap so nguyen.");
+                scanner.next();
+            }
+            n = scanner.nextInt();
+        } while (n < 2 || n > 10);
+
+        // Khai báo một mảng chứa đối tượng Person
+        Person[] persons = new Person[n];
+
+        // Nhập mảng các đối tượng Person
+        inputPersonArray(persons);
+
+        // Hiển thị mảng các đối tượng Person
+        displayPersonArray(persons);
+
+        // Hiển thị số lượng Professor trong mảng
+        int countProfessors = countProfessors(persons);
+        System.out.println("So Professor trong mang: " + countProfessors);
+
+        scanner.close();
+    }
+
+    public static void inputPersonArray(Person[] persons) {
+        Scanner scanner = new Scanner(System.in);
+        for (int i = 0; i < persons.length; i++) {
+            String type;
+            do {
+                System.out.println("Nhap loai doi tuong (ta/lec/gs): ");
+                type = scanner.nextLine().toLowerCase();
+            } while (!type.equals("ta") && !type.equals("lec") && !type.equals("gs"));
+
+            switch (type) {
+                case "ta":
+                    persons[i] = inputTeachingAssistant();
+                    break;
+                case "lec":
+                    persons[i] = inputLecturer();
+                    break;
+                case "gs":
+                    persons[i] = inputProfessor();
+                    break;
+            }
+        }
+        scanner.close();
+    }
+
+    public static TeachingAssistant inputTeachingAssistant() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Nhap thong tin cho Teaching Assistant: ");
+        // Thực hiện logic nhập thông tin của Teaching Assistant
+        // return new TeachingAssistant(/*Thông tin của Teaching Assistant*/);
+        scanner.close();
+        return null;
+    }
+
+    public static Lecturer inputLecturer() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Nhap thong tin cho Lecturer: ");
+        // Thực hiện logic nhập thông tin của Lecturer
+        // return new Lecturer(/*Thông tin của Lecturer*/);
+        scanner.close();
+        return null;
+    }
+
+    public static Professor inputProfessor() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Nhap thong tin cho Professor: ");
+        // Thực hiện logic nhập thông tin của Professor
+        // return new Professor(/*Thông tin của Professor*/);
+        scanner.close();
+        return null;
+    }
+
+    public static void displayPersonArray(Person[] persons) {
+        System.out.println("Danh sach doi tuong: ");
+        for (Person person : persons) {
+            // Hiển thị thông tin, role, và KPI của từng đối tượng
+            System.out.println("Thong tin: " + person.getName() + ", Role: " + person.getRole() + ", KPI: " + person.calculateKPI());
+        }
+    }
+
+    public static int countProfessors(Person[] persons) {
+        int count = 0;
+        for (Person person : persons) {
+            if (person instanceof Professor) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
